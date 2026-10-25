@@ -1,0 +1,1222 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`09-line-breaks.md: plain, 40 columns 1`] = `
+"This paragraph is hard-wrapped in the
+source at about forty columns, the way
+many READMEs are written. It should
+reflow to the terminal width rather than
+breaking at these points.
+
+This line ends with two spaces,
+so this one starts a new line.
+
+This line ends with a backslash,
+so this one starts a new line too.
+
+- A list item that is also hard-wrapped
+  in the source
+- Second item"
+`;
+
+exports[`09-line-breaks.md: plain, 80 columns 1`] = `
+"This paragraph is hard-wrapped in the source at about forty columns, the way
+many READMEs are written. It should reflow to the terminal width rather than
+breaking at these points.
+
+This line ends with two spaces,
+so this one starts a new line.
+
+This line ends with a backslash,
+so this one starts a new line too.
+
+- A list item that is also hard-wrapped in the source
+- Second item"
+`;
+
+exports[`09-line-breaks.md: colour, 80 columns 1`] = `
+"This paragraph is hard-wrapped in the source at about forty columns, the way
+many READMEs are written. It should reflow to the terminal width rather than
+breaking at these points.
+
+This line ends with two spaces,
+so this one starts a new line.
+
+This line ends with a backslash,
+so this one starts a new line too.
+
+- A list item that is also hard-wrapped in the source
+- Second item"
+`;
+
+exports[`02-tables-wrapping.md: plain, 40 columns 1`] = `
+"A table too wide for the screen, so
+cells wrap:
+
+Command: configuration
+What it does: Reads and validates the
+settings file
+Notes: Looks in
+$XDG_CONFIG_HOME/example/ first, then
+falls back to the home directory
+───────────────────────────────────────
+Command: serve
+What it does: Starts the local server
+Notes: Listens on port 8080 unless
+--port is given
+───────────────────────────────────────
+Command: synchronise
+What it does: Pulls changes from the
+remote
+Notes: Runs the hooks in
+~/.config/example/hooks/ before and
+after, if there are any
+───────────────────────────────────────
+Command: completions
+What it does: Prints shell completion
+scripts
+Notes: Supports bash, zsh and fish;
+other shells may work but are not
+tested
+
+One cell long enough to need more than
+four lines, which switches to the
+vertical layout:
+
+Name: alpha
+Description: This description is
+deliberately very long so that at a
+normal terminal width the cell has to
+wrap onto more than four lines, and
+the renderer gives up on the box
+layout and prints each row as header
+and value pairs instead. It keeps
+going for a while to make sure that
+happens even on a wide screen with
+plenty of room for the text to spread
+out.
+───────────────────────────────────────
+Name: beta
+Description: short
+
+Many columns, so even the longest words
+don't fit and words get cut:
+
+Identifier: production-eu-west
+Environment: kubernetes
+Configuration: helm-values
+Deployment: progressive
+Observability: opentelemetry
+Authentication: oauth2-pkce
+Authorization: rbac-policies
+Localization: translations
+
+Wide characters (CJK and emoji take two
+columns each):
+
+┌──────────┬────────────┬──────┐
+│ Language │  Greeting  │ Mood │
+├──────────┼────────────┼──────┤
+│ Japanese │ こんにちは │ 😀   │
+├──────────┼────────────┼──────┤
+│ Chinese  │ 你好       │ 🎉🎉 │
+├──────────┼────────────┼──────┤
+│ Polish   │ Cześć      │ 👍   │
+└──────────┴────────────┴──────┘"
+`;
+
+exports[`02-tables-wrapping.md: plain, 80 columns 1`] = `
+"A table too wide for the screen, so cells wrap:
+
+┌───────────────┬───────────────────┬──────────────────────────────────────────┐
+│    Command    │   What it does    │                  Notes                   │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│               │ Reads and         │ Looks in $XDG_CONFIG_HOME/example/       │
+│ configuration │ validates the     │ first, then falls back to the home       │
+│               │ settings file     │ directory                                │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│ serve         │ Starts the local  │ Listens on port 8080 unless --port is    │
+│               │ server            │ given                                    │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│               │ Pulls changes     │ Runs the hooks in                        │
+│ synchronise   │ from the remote   │ ~/.config/example/hooks/ before and      │
+│               │                   │ after, if there are any                  │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│               │ Prints shell      │ Supports bash, zsh and fish; other       │
+│ completions   │ completion        │ shells may work but are not tested       │
+│               │ scripts           │                                          │
+└───────────────┴───────────────────┴──────────────────────────────────────────┘
+
+One cell long enough to need more than four lines, which switches to the
+vertical layout:
+
+Name: alpha
+Description: This description is deliberately very long so that at a normal
+terminal width the cell has to wrap onto more than four lines, and the
+renderer gives up on the box layout and prints each row as header and value
+pairs instead. It keeps going for a while to make sure that happens even on a
+wide screen with plenty of room for the text to spread out.
+────────────────────────────────────────
+Name: beta
+Description: short
+
+Many columns, so even the longest words don't fit and words get cut:
+
+┌──────────────┬───────┬─────────┬───────┬─────────┬─────────┬────────┬────────┐
+│              │ Envir │ Configu │ Deplo │ Observa │ Authent │ Author │ Locali │
+│  Identifier  │ onmen │ ration  │ yment │ bility  │ ication │ izatio │ zation │
+│              │   t   │         │       │         │         │   n    │        │
+├──────────────┼───────┼─────────┼───────┼─────────┼─────────┼────────┼────────┤
+│ production-e │ kuber │ helm-va │ progr │ opentel │ oauth2- │ rbac-p │ transl │
+│ u-west       │ netes │ lues    │ essiv │ emetry  │ pkce    │ olicie │ ations │
+│              │       │         │ e     │         │         │ s      │        │
+└──────────────┴───────┴─────────┴───────┴─────────┴─────────┴────────┴────────┘
+
+Wide characters (CJK and emoji take two columns each):
+
+┌──────────┬────────────┬──────┐
+│ Language │  Greeting  │ Mood │
+├──────────┼────────────┼──────┤
+│ Japanese │ こんにちは │ 😀   │
+├──────────┼────────────┼──────┤
+│ Chinese  │ 你好       │ 🎉🎉 │
+├──────────┼────────────┼──────┤
+│ Polish   │ Cześć      │ 👍   │
+└──────────┴────────────┴──────┘"
+`;
+
+exports[`02-tables-wrapping.md: colour, 80 columns 1`] = `
+"A table too wide for the screen, so cells wrap:
+
+┌───────────────┬───────────────────┬──────────────────────────────────────────┐
+│    Command    │   What it does    │                  Notes                   │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│               │ Reads and         │ Looks in \\e[38;2;177;185;249m$XDG_CONFIG_HOME/example/\\e[39m       │
+│ configuration │ validates the     │ first, then falls back to the home       │
+│               │ settings file     │ directory                                │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│ serve         │ Starts the local  │ Listens on port 8080 unless \\e[38;2;177;185;249m--port\\e[39m is    │
+│               │ server            │ given                                    │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│               │ Pulls changes     │ Runs the hooks in                        │
+│ synchronise   │ from the remote   │ \\e[38;2;177;185;249m~/.config/example/hooks/\\e[39m before and      │
+│               │                   │ after, if there are any                  │
+├───────────────┼───────────────────┼──────────────────────────────────────────┤
+│               │ Prints shell      │ Supports bash, zsh and fish; other       │
+│ completions   │ completion        │ shells may work but are not tested       │
+│               │ scripts           │                                          │
+└───────────────┴───────────────────┴──────────────────────────────────────────┘
+
+One cell long enough to need more than four lines, which switches to the
+vertical layout:
+
+\\e[1mName:\\e[22m alpha
+\\e[1mDescription:\\e[22m This description is deliberately very long so that at a normal
+terminal width the cell has to wrap onto more than four lines, and the
+renderer gives up on the box layout and prints each row as header and value
+pairs instead. It keeps going for a while to make sure that happens even on a
+wide screen with plenty of room for the text to spread out.
+────────────────────────────────────────
+\\e[1mName:\\e[22m beta
+\\e[1mDescription:\\e[22m short
+
+Many columns, so even the longest words don't fit and words get cut:
+
+┌──────────────┬───────┬─────────┬───────┬─────────┬─────────┬────────┬────────┐
+│              │ Envir │ Configu │ Deplo │ Observa │ Authent │ Author │ Locali │
+│  Identifier  │ onmen │ ration  │ yment │ bility  │ ication │ izatio │ zation │
+│              │   t   │         │       │         │         │   n    │        │
+├──────────────┼───────┼─────────┼───────┼─────────┼─────────┼────────┼────────┤
+│ production-e │ kuber │ helm-va │ progr │ opentel │ oauth2- │ rbac-p │ transl │
+│ u-west       │ netes │ lues    │ essiv │ emetry  │ pkce    │ olicie │ ations │
+│              │       │         │ e     │         │         │ s      │        │
+└──────────────┴───────┴─────────┴───────┴─────────┴─────────┴────────┴────────┘
+
+Wide characters (CJK and emoji take two columns each):
+
+┌──────────┬────────────┬──────┐
+│ Language │  Greeting  │ Mood │
+├──────────┼────────────┼──────┤
+│ Japanese │ こんにちは │ 😀   │
+├──────────┼────────────┼──────┤
+│ Chinese  │ 你好       │ 🎉🎉 │
+├──────────┼────────────┼──────┤
+│ Polish   │ Cześć      │ 👍   │
+└──────────┴────────────┴──────┘"
+`;
+
+exports[`01-tables-basic.md: plain, 40 columns 1`] = `
+"A table that fits at its natural width:
+
+┌───────┬───────┬──────────┐
+│ Tool  │ Stars │  Status  │
+├───────┼───────┼──────────┤
+│ glow  │ 27.8k │ active   │
+├───────┼───────┼──────────┤
+│ mdcat │ 2.4k  │ archived │
+└───────┴───────┴──────────┘
+
+Column alignment (left, centre, right,
+unspecified):
+
+┌────────┬─────────┬────────┬──────────┐
+│  Left  │ Centre  │ Right  │ Default  │
+├────────┼─────────┼────────┼──────────┤
+│ a      │    b    │      c │ d        │
+├────────┼─────────┼────────┼──────────┤
+│ longer │ longer  │ longer │ longer   │
+│ left   │ centre  │  right │ default  │
+└────────┴─────────┴────────┴──────────┘
+
+Inline formatting inside cells:
+
+┌────────┬───────────────────────────┐
+│  Kind  │          Example          │
+├────────┼───────────────────────────┤
+│ Bold   │ bold text                 │
+├────────┼───────────────────────────┤
+│ Italic │ italic text               │
+├────────┼───────────────────────────┤
+│ Code   │ npm install               │
+├────────┼───────────────────────────┤
+│ Link   │ \x1B]8;;https://example.com\x07example\x1B]8;;\x07                   │
+├────────┼───────────────────────────┤
+│ Mixed  │ bold with code and italic │
+└────────┴───────────────────────────┘
+
+Empty cells:
+
+┌─────┬─────┬───────┐
+│  A  │  B  │   C   │
+├─────┼─────┼───────┤
+│ one │     │ three │
+├─────┼─────┼───────┤
+│     │ two │       │
+└─────┴─────┴───────┘"
+`;
+
+exports[`01-tables-basic.md: plain, 80 columns 1`] = `
+"A table that fits at its natural width:
+
+┌───────┬───────┬──────────┐
+│ Tool  │ Stars │  Status  │
+├───────┼───────┼──────────┤
+│ glow  │ 27.8k │ active   │
+├───────┼───────┼──────────┤
+│ mdcat │ 2.4k  │ archived │
+└───────┴───────┴──────────┘
+
+Column alignment (left, centre, right, unspecified):
+
+┌─────────────┬───────────────┬──────────────┬────────────────┐
+│    Left     │    Centre     │    Right     │    Default     │
+├─────────────┼───────────────┼──────────────┼────────────────┤
+│ a           │       b       │            c │ d              │
+├─────────────┼───────────────┼──────────────┼────────────────┤
+│ longer left │ longer centre │ longer right │ longer default │
+└─────────────┴───────────────┴──────────────┴────────────────┘
+
+Inline formatting inside cells:
+
+┌────────┬───────────────────────────┐
+│  Kind  │          Example          │
+├────────┼───────────────────────────┤
+│ Bold   │ bold text                 │
+├────────┼───────────────────────────┤
+│ Italic │ italic text               │
+├────────┼───────────────────────────┤
+│ Code   │ npm install               │
+├────────┼───────────────────────────┤
+│ Link   │ \x1B]8;;https://example.com\x07example\x1B]8;;\x07                   │
+├────────┼───────────────────────────┤
+│ Mixed  │ bold with code and italic │
+└────────┴───────────────────────────┘
+
+Empty cells:
+
+┌─────┬─────┬───────┐
+│  A  │  B  │   C   │
+├─────┼─────┼───────┤
+│ one │     │ three │
+├─────┼─────┼───────┤
+│     │ two │       │
+└─────┴─────┴───────┘"
+`;
+
+exports[`01-tables-basic.md: colour, 80 columns 1`] = `
+"A table that fits at its natural width:
+
+┌───────┬───────┬──────────┐
+│ Tool  │ Stars │  Status  │
+├───────┼───────┼──────────┤
+│ glow  │ 27.8k │ active   │
+├───────┼───────┼──────────┤
+│ mdcat │ 2.4k  │ archived │
+└───────┴───────┴──────────┘
+
+Column alignment (left, centre, right, unspecified):
+
+┌─────────────┬───────────────┬──────────────┬────────────────┐
+│    Left     │    Centre     │    Right     │    Default     │
+├─────────────┼───────────────┼──────────────┼────────────────┤
+│ a           │       b       │            c │ d              │
+├─────────────┼───────────────┼──────────────┼────────────────┤
+│ longer left │ longer centre │ longer right │ longer default │
+└─────────────┴───────────────┴──────────────┴────────────────┘
+
+Inline formatting inside cells:
+
+┌────────┬───────────────────────────┐
+│  Kind  │          Example          │
+├────────┼───────────────────────────┤
+│ Bold   │ \\e[1mbold text\\e[22m                 │
+├────────┼───────────────────────────┤
+│ Italic │ \\e[3mitalic text\\e[23m               │
+├────────┼───────────────────────────┤
+│ Code   │ \\e[38;2;177;185;249mnpm install\\e[39m               │
+├────────┼───────────────────────────┤
+│ Link   │ \\e]8;;https://example.com\\a\\e[94mexample\\e[39m\\e]8;;\\a                   │
+├────────┼───────────────────────────┤
+│ Mixed  │ \\e[1mbold\\e[22m with \\e[38;2;177;185;249mcode\\e[39m and \\e[3mitalic\\e[23m │
+└────────┴───────────────────────────┘
+
+Empty cells:
+
+┌─────┬─────┬───────┐
+│  A  │  B  │   C   │
+├─────┼─────┼───────┤
+│ one │     │ three │
+├─────┼─────┼───────┤
+│     │ two │       │
+└─────┴─────┴───────┘"
+`;
+
+exports[`05-code.md: plain, 40 columns 1`] = `
+"Python:
+
+from dataclasses import dataclass
+
+@dataclass
+class User:
+    name: str
+    age: int = 0  # default
+
+    def greet(self) -> str:
+        return f"hi {self.name}, you are
+{self.age}"
+
+TypeScript:
+
+interface Props { title: string; count?:
+number }
+
+export function render({ title, count =
+1 }: Props): string {
+  const items = Array.from({ length:
+count }, (_, i) => \`\${title} #\${i}\`);
+  return items.join("\\n");
+}
+
+Shell:
+
+for f in *.md; do
+  echo "rendering $f" && md -p "$f" >
+"\${f%.md}.txt"
+done
+
+JSON:
+
+{ "padding": { "top": 1, "left": 2 },
+"enabled": true, "count": 3, "name":
+null }
+
+Diff:
+
+- const width = cols - 4;
++ const width = cols - left - right;
+
+No language:
+
+plain fenced block
+  with indentation
+
+Unknown language:
+
+weirdlang
+this has no highlighter
+
+Indented code block:
+
+indented with four spaces
+second line
+A very long line that has to wrap:
+
+const message = "this line is
+deliberately much longer than any normal
+terminal is wide so we can see how a
+long line of code wraps";
+
+Tabs:
+
+func main() {
+  fmt.Println("tab indented")
+}"
+`;
+
+exports[`05-code.md: plain, 80 columns 1`] = `
+"Python:
+
+from dataclasses import dataclass
+
+@dataclass
+class User:
+    name: str
+    age: int = 0  # default
+
+    def greet(self) -> str:
+        return f"hi {self.name}, you are {self.age}"
+
+TypeScript:
+
+interface Props { title: string; count?: number }
+
+export function render({ title, count = 1 }: Props): string {
+  const items = Array.from({ length: count }, (_, i) => \`\${title} #\${i}\`);
+  return items.join("\\n");
+}
+
+Shell:
+
+for f in *.md; do
+  echo "rendering $f" && md -p "$f" > "\${f%.md}.txt"
+done
+
+JSON:
+
+{ "padding": { "top": 1, "left": 2 }, "enabled": true, "count": 3, "name": null
+}
+
+Diff:
+
+- const width = cols - 4;
++ const width = cols - left - right;
+
+No language:
+
+plain fenced block
+  with indentation
+
+Unknown language:
+
+weirdlang
+this has no highlighter
+
+Indented code block:
+
+indented with four spaces
+second line
+A very long line that has to wrap:
+
+const message = "this line is deliberately much longer than any normal terminal
+is wide so we can see how a long line of code wraps";
+
+Tabs:
+
+func main() {
+  fmt.Println("tab indented")
+}"
+`;
+
+exports[`05-code.md: colour, 80 columns 1`] = `
+"Python:
+
+\\e[48;2;30;30;30m \\e[34mfrom\\e[39m dataclasses \\e[34mimport\\e[39m dataclass                                              \\e[49m
+\\e[48;2;30;30;30m                                                                                \\e[49m
+\\e[48;2;30;30;30m \\e[90m@dataclass\\e[39m                                                                     \\e[49m
+\\e[48;2;30;30;30m \\e[34mclass\\e[39m \\e[34mUser\\e[39m:                                                                    \\e[49m
+\\e[48;2;30;30;30m     name: \\e[36mstr\\e[39m                                                                  \\e[49m
+\\e[48;2;30;30;30m     age: \\e[36mint\\e[39m = \\e[32m0\\e[39m  \\e[32m# default\\e[39m                                                    \\e[49m
+\\e[48;2;30;30;30m                                                                                \\e[49m
+\\e[48;2;30;30;30m     \\e[34mdef\\e[39m \\e[33mgreet\\e[39m(self) -> \\e[36mstr\\e[39m:                                                    \\e[49m
+\\e[48;2;30;30;30m         \\e[34mreturn\\e[39m \\e[31mf"hi {self.name}, you are {self.age}"\\e[39m                           \\e[49m
+
+TypeScript:
+
+\\e[48;2;30;30;30m \\e[34minterface\\e[39m \\e[34mProps\\e[39m { \\e[36mtitle\\e[39m: \\e[36mstring\\e[39m; \\e[36mcount\\e[39m?: \\e[36mnumber\\e[39m }                              \\e[49m
+\\e[48;2;30;30;30m                                                                                \\e[49m
+\\e[48;2;30;30;30m \\e[34mexport\\e[39m \\e[34mfunction\\e[39m \\e[33mrender\\e[39m({ title, count = \\e[32m1\\e[39m }: \\e[34mProps\\e[39m): \\e[36mstring\\e[39m {                  \\e[49m
+\\e[48;2;30;30;30m   \\e[34mconst\\e[39m items = \\e[34mArray\\e[39m.\\e[33mfrom\\e[39m({ \\e[36mlength\\e[39m: count }, \\e[33m(_, i) =>\\e[39m \\e[31m\`\${title} #\${i}\`\\e[39m);     \\e[49m
+\\e[48;2;30;30;30m   \\e[34mreturn\\e[39m items.\\e[33mjoin\\e[39m(\\e[31m"\\n"\\e[39m);                                                     \\e[49m
+\\e[48;2;30;30;30m }                                                                              \\e[49m
+
+Shell:
+
+\\e[48;2;30;30;30m \\e[34mfor\\e[39m f \\e[34min\\e[39m *.md; \\e[34mdo\\e[39m                                                              \\e[49m
+\\e[48;2;30;30;30m   \\e[36mecho\\e[39m \\e[31m"rendering $f"\\e[39m && md -p \\e[31m"$f"\\e[39m > \\e[31m"\${f%.md}.txt"\\e[39m                           \\e[49m
+\\e[48;2;30;30;30m \\e[34mdone\\e[39m                                                                           \\e[49m
+
+JSON:
+
+\\e[48;2;30;30;30m { \\e[36m"padding"\\e[39m: { \\e[36m"top"\\e[39m: \\e[32m1\\e[39m, \\e[36m"left"\\e[39m: \\e[32m2\\e[39m }, \\e[36m"enabled"\\e[39m: \\e[34m\\e[34mtrue\\e[39m\\e[34m\\e[39m, \\e[36m"count"\\e[39m: \\e[32m3\\e[39m, \\e[36m"name"\\e[39m:     \\e[49m
+\\e[48;2;30;30;30m \\e[34m\\e[34mnull\\e[39m\\e[34m\\e[39m }                                                                         \\e[49m
+
+Diff:
+
+\\e[48;2;30;30;30m \\e[31m- const width = cols - 4;\\e[39m                                                      \\e[49m
+\\e[48;2;30;30;30m \\e[32m+ const width = cols - left - right;\\e[39m                                           \\e[49m
+
+No language:
+
+\\e[48;2;30;30;30m \\e[38;2;177;185;249mplain fenced block\\e[39m                                                             \\e[49m
+\\e[48;2;30;30;30m   \\e[38;2;177;185;249mwith indentation\\e[39m                                                             \\e[49m
+
+Unknown language:
+
+\\e[2mweirdlang\\e[22m
+\\e[48;2;30;30;30m this has no highlighter                                                        \\e[49m
+
+Indented code block:
+
+\\e[48;2;30;30;30m indented with four spaces                                                      \\e[49m
+\\e[48;2;30;30;30m second line                                                                    \\e[49m
+A very long line that has to wrap:
+
+\\e[48;2;30;30;30m \\e[34mconst\\e[39m message = \\e[31m"this line is deliberately much longer than any normal\\e[39m         \\e[49m
+\\e[48;2;30;30;30m \\e[31mterminal is wide so we can see how a long line of code wraps"\\e[39m;                 \\e[49m
+
+Tabs:
+
+\\e[48;2;30;30;30m \\e[33m\\e[34mfunc\\e[39m\\e[33m main()\\e[39m {                                                                  \\e[49m
+\\e[48;2;30;30;30m   fmt.Println(\\e[31m"tab indented"\\e[39m)                                                  \\e[49m
+\\e[48;2;30;30;30m }                                                                              \\e[49m"
+`;
+
+exports[`10-colours.md: plain, 40 columns 1`] = `
+"Colours
+
+Inline code: permission colour. A link:
+\x1B]8;;https://example.com\x07blue link\x1B]8;;\x07.
+
+no-language fence, also the permission
+colour
+
+// comment (green)
+const answer = 42; // number (green)
+const name = "string"; // string (red)
+function greet() { return
+console.log(name); } // keyword (blue),
+function (yellow), built-in (cyan)
+
+▎ Dim bar, italic text.
+
+~~strikethrough~~ bold italic"
+`;
+
+exports[`10-colours.md: plain, 80 columns 1`] = `
+"Colours
+
+Inline code: permission colour. A link: \x1B]8;;https://example.com\x07blue link\x1B]8;;\x07.
+
+no-language fence, also the permission colour
+
+// comment (green)
+const answer = 42; // number (green)
+const name = "string"; // string (red)
+function greet() { return console.log(name); } // keyword (blue), function
+(yellow), built-in (cyan)
+
+▎ Dim bar, italic text.
+
+~~strikethrough~~ bold italic"
+`;
+
+exports[`10-colours.md: colour, 80 columns 1`] = `
+"\\e[1m\\e[3m\\e[4mColours\\e[24m\\e[23m\\e[22m
+
+Inline code: \\e[38;2;177;185;249mpermission colour\\e[39m. A link: \\e]8;;https://example.com\\a\\e[94mblue link\\e[39m\\e]8;;\\a.
+
+\\e[48;2;30;30;30m \\e[38;2;177;185;249mno-language fence, also the permission colour\\e[39m                                  \\e[49m
+
+\\e[48;2;30;30;30m \\e[32m// comment (green)\\e[39m                                                             \\e[49m
+\\e[48;2;30;30;30m \\e[34mconst\\e[39m answer = \\e[32m42\\e[39m; \\e[32m// number (green)\\e[39m                                           \\e[49m
+\\e[48;2;30;30;30m \\e[34mconst\\e[39m name = \\e[31m"string"\\e[39m; \\e[32m// string (red)\\e[39m                                         \\e[49m
+\\e[48;2;30;30;30m \\e[34mfunction\\e[39m \\e[33mgreet\\e[39m() { \\e[34mreturn\\e[39m console.\\e[33mlog\\e[39m(name); } \\e[32m// keyword (blue), function\\e[39m     \\e[49m
+\\e[48;2;30;30;30m \\e[32m(yellow), built-in (cyan)\\e[39m                                                      \\e[49m
+
+\\e[2m▎\\e[22m \\e[3mDim bar, italic text.\\e[23m
+
+\\e[9mstrikethrough\\e[29m \\e[1mbold\\e[22m \\e[3mitalic\\e[23m"
+`;
+
+exports[`04-lists-with-blocks.md: plain, 40 columns 1`] = `
+"A code block inside a list item:
+
+1. Install the dependencies:
+   npm install
+   npm run build
+2. Run it:
+   md README.md
+
+A quote inside a list item:
+
+- Someone said:
+  ▎ Keep it simple.
+- And that was that.
+
+A table inside a list item:
+
+- Results:
+
+  ┌──────┬────────┐
+  │ Test │ Result │
+  ├──────┼────────┤
+  │ unit │ pass   │
+  ├──────┼────────┤
+  │ e2e  │ fail   │
+  └──────┴────────┘
+
+- Next item.
+
+A paragraph straight after a list, with
+no blank line between:
+
+- one
+- two Lazy continuation line."
+`;
+
+exports[`04-lists-with-blocks.md: plain, 80 columns 1`] = `
+"A code block inside a list item:
+
+1. Install the dependencies:
+   npm install
+   npm run build
+2. Run it:
+   md README.md
+
+A quote inside a list item:
+
+- Someone said:
+  ▎ Keep it simple.
+- And that was that.
+
+A table inside a list item:
+
+- Results:
+
+  ┌──────┬────────┐
+  │ Test │ Result │
+  ├──────┼────────┤
+  │ unit │ pass   │
+  ├──────┼────────┤
+  │ e2e  │ fail   │
+  └──────┴────────┘
+
+- Next item.
+
+A paragraph straight after a list, with no blank line between:
+
+- one
+- two Lazy continuation line."
+`;
+
+exports[`04-lists-with-blocks.md: colour, 80 columns 1`] = `
+"A code block inside a list item:
+
+1. Install the dependencies:
+   \\e[48;2;30;30;30m npm install                                                                 \\e[49m
+   \\e[48;2;30;30;30m npm run build                                                               \\e[49m
+2. Run it:
+   \\e[48;2;30;30;30m md README.md                                                                \\e[49m
+
+A quote inside a list item:
+
+- Someone said:
+  \\e[2m▎\\e[22m \\e[3mKeep it simple.\\e[23m
+- And that was that.
+
+A table inside a list item:
+
+- Results:
+
+  ┌──────┬────────┐
+  │ Test │ Result │
+  ├──────┼────────┤
+  │ unit │ pass   │
+  ├──────┼────────┤
+  │ e2e  │ fail   │
+  └──────┴────────┘
+
+- Next item.
+
+A paragraph straight after a list, with no blank line between:
+
+- one
+- two Lazy continuation line."
+`;
+
+exports[`07-headings-and-spacing.md: plain, 40 columns 1`] = `
+"Heading 1
+
+Heading 2
+
+Heading 3
+
+Heading 4
+
+Heading 5
+
+Heading 6
+
+Setext heading
+
+Setext subheading
+
+A paragraph straight before a list:
+- item a
+- item b
+
+A paragraph after the list.
+
+Heading straight before a table
+
+┌─────┬─────┐
+│  A  │  B  │
+├─────┼─────┤
+│ 1   │ 2   │
+└─────┴─────┘
+
+Paragraph straight after the table.
+
+▎ Quote straight after a paragraph.
+
+Text before a rule.
+
+────────────────────────────────────────
+
+Text after a rule.
+
+────────────────────────────────────────
+
+Two headings
+
+In a row
+
+Final paragraph."
+`;
+
+exports[`07-headings-and-spacing.md: plain, 80 columns 1`] = `
+"Heading 1
+
+Heading 2
+
+Heading 3
+
+Heading 4
+
+Heading 5
+
+Heading 6
+
+Setext heading
+
+Setext subheading
+
+A paragraph straight before a list:
+- item a
+- item b
+
+A paragraph after the list.
+
+Heading straight before a table
+
+┌─────┬─────┐
+│  A  │  B  │
+├─────┼─────┤
+│ 1   │ 2   │
+└─────┴─────┘
+
+Paragraph straight after the table.
+
+▎ Quote straight after a paragraph.
+
+Text before a rule.
+
+────────────────────────────────────────────────────────────────────────────────
+
+Text after a rule.
+
+────────────────────────────────────────────────────────────────────────────────
+
+Two headings
+
+In a row
+
+Final paragraph."
+`;
+
+exports[`07-headings-and-spacing.md: colour, 80 columns 1`] = `
+"\\e[1m\\e[3m\\e[4mHeading 1\\e[24m\\e[23m\\e[22m
+
+\\e[1mHeading 2\\e[22m
+
+\\e[1mHeading 3\\e[22m
+
+\\e[1mHeading 4\\e[22m
+
+\\e[1mHeading 5\\e[22m
+
+\\e[1mHeading 6\\e[22m
+
+\\e[1m\\e[3m\\e[4mSetext heading\\e[24m\\e[23m\\e[22m
+
+\\e[1mSetext subheading\\e[22m
+
+A paragraph straight before a list:
+- item a
+- item b
+
+A paragraph after the list.
+
+\\e[1mHeading straight before a table\\e[22m
+
+┌─────┬─────┐
+│  A  │  B  │
+├─────┼─────┤
+│ 1   │ 2   │
+└─────┴─────┘
+
+Paragraph straight after the table.
+
+\\e[2m▎\\e[22m \\e[3mQuote straight after a paragraph.\\e[23m
+
+Text before a rule.
+
+\\e[90m────────────────────────────────────────────────────────────────────────────────\\e[39m
+
+Text after a rule.
+
+\\e[90m────────────────────────────────────────────────────────────────────────────────\\e[39m
+
+\\e[1mTwo headings\\e[22m
+
+\\e[1mIn a row\\e[22m
+
+Final paragraph."
+`;
+
+exports[`03-lists.md: plain, 40 columns 1`] = `
+"Tight bullets, nested four levels:
+
+- Level one
+  - Level two
+    - Level three
+      - Level four
+- Back to one, with a long item that
+  wraps so the continuation line should
+  line up with the text, not the marker
+
+Ordered, nested (markers should go 1. →
+a. → i. → 1.):
+
+1. First
+2. Second
+   a. Second, a
+   b. Second, b
+      i. Second, b, i
+      ii. Second, b, ii
+          1. Fourth level
+3. Third
+
+Ordered list starting at 5:
+
+5. Five
+6. Six
+7. Seven
+
+Task list:
+
+- [x] Done
+- [ ] Not done
+- [x] Done with code and bold
+
+Loose list (blank lines between items in
+the source):
+
+- Loose one
+- Loose two
+- Loose three
+
+Items with more than one paragraph:
+
+1. First paragraph of item one.
+   
+   Second paragraph of item one.
+2. Item two."
+`;
+
+exports[`03-lists.md: plain, 80 columns 1`] = `
+"Tight bullets, nested four levels:
+
+- Level one
+  - Level two
+    - Level three
+      - Level four
+- Back to one, with a long item that wraps so the continuation line should line
+  up with the text, not the marker
+
+Ordered, nested (markers should go 1. → a. → i. → 1.):
+
+1. First
+2. Second
+   a. Second, a
+   b. Second, b
+      i. Second, b, i
+      ii. Second, b, ii
+          1. Fourth level
+3. Third
+
+Ordered list starting at 5:
+
+5. Five
+6. Six
+7. Seven
+
+Task list:
+
+- [x] Done
+- [ ] Not done
+- [x] Done with code and bold
+
+Loose list (blank lines between items in the source):
+
+- Loose one
+- Loose two
+- Loose three
+
+Items with more than one paragraph:
+
+1. First paragraph of item one.
+   
+   Second paragraph of item one.
+2. Item two."
+`;
+
+exports[`03-lists.md: colour, 80 columns 1`] = `
+"Tight bullets, nested four levels:
+
+- Level one
+  - Level two
+    - Level three
+      - Level four
+- Back to one, with a long item that wraps so the continuation line should line
+  up with the text, not the marker
+
+Ordered, nested (markers should go 1. → a. → i. → 1.):
+
+1. First
+2. Second
+   a. Second, a
+   b. Second, b
+      i. Second, b, i
+      ii. Second, b, ii
+          1. Fourth level
+3. Third
+
+Ordered list starting at 5:
+
+5. Five
+6. Six
+7. Seven
+
+Task list:
+
+- [x] Done
+- [ ] Not done
+- [x] Done with \\e[38;2;177;185;249mcode\\e[39m and \\e[1mbold\\e[22m
+
+Loose list (blank lines between items in the source):
+
+- Loose one
+- Loose two
+- Loose three
+
+Items with more than one paragraph:
+
+1. First paragraph of item one.
+   
+   Second paragraph of item one.
+2. Item two."
+`;
+
+exports[`06-inline.md: plain, 40 columns 1`] = `
+"Emphasis: bold, italic, bold italic,
+~~strikethrough~~, bold with italic
+inside.
+
+Code spans: npm install, code with \`
+backtick, and a < b && c > d.
+
+Links:
+
+- Inline: \x1B]8;;https://code.claude.com\x07Claude Code\x1B]8;;\x07
+- With a title: \x1B]8;;https://example.com\x07example\x1B]8;;\x07 ("Example
+  title")
+- Bare URL: \x1B]8;;https://github.com/bibixx\x07https://github.com/bibixx\x1B]8;;\x07
+- Angle brackets: \x1B]8;;https://example.org\x07https://example.org\x1B]8;;\x07
+- Link text equal to the URL:
+  \x1B]8;;https://example.com\x07https://example.com\x1B]8;;\x07
+- Email: someone@example.com
+- Mailto with text: write to me
+  (someone@example.com)
+- Code that is a URL:
+  https://example.com/path
+
+Image: alt text
+(https://example.com/image.png)
+
+Escapes: *not italic*, \`not code\`, # not
+a heading, 1. not a list.
+
+Entities: &amp; &lt; &gt; &copy; and a
+non-breaking space.
+
+Inline HTML:
+<kbd>Ctrl</kbd>+<kbd>C</kbd> and <b>bold
+tag</b>.
+
+Issue reference: see #123 and
+bibixx/md#4.
+
+<!-- An HTML comment, shown in grey -->"
+`;
+
+exports[`06-inline.md: plain, 80 columns 1`] = `
+"Emphasis: bold, italic, bold italic, ~~strikethrough~~, bold with italic inside.
+
+Code spans: npm install, code with \` backtick, and a < b && c > d.
+
+Links:
+
+- Inline: \x1B]8;;https://code.claude.com\x07Claude Code\x1B]8;;\x07
+- With a title: \x1B]8;;https://example.com\x07example\x1B]8;;\x07 ("Example title")
+- Bare URL: \x1B]8;;https://github.com/bibixx\x07https://github.com/bibixx\x1B]8;;\x07
+- Angle brackets: \x1B]8;;https://example.org\x07https://example.org\x1B]8;;\x07
+- Link text equal to the URL: \x1B]8;;https://example.com\x07https://example.com\x1B]8;;\x07
+- Email: someone@example.com
+- Mailto with text: write to me (someone@example.com)
+- Code that is a URL: https://example.com/path
+
+Image: alt text (https://example.com/image.png)
+
+Escapes: *not italic*, \`not code\`, # not a heading, 1. not a list.
+
+Entities: &amp; &lt; &gt; &copy; and a non-breaking space.
+
+Inline HTML: <kbd>Ctrl</kbd>+<kbd>C</kbd> and <b>bold tag</b>.
+
+Issue reference: see #123 and bibixx/md#4.
+
+<!-- An HTML comment, shown in grey -->"
+`;
+
+exports[`06-inline.md: colour, 80 columns 1`] = `
+"Emphasis: \\e[1mbold\\e[22m, \\e[3mitalic\\e[23m, \\e[3m\\e[1mbold italic\\e[22m\\e[23m, \\e[9mstrikethrough\\e[29m, \\e[1mbold with \\e[3mitalic\\e[23m inside\\e[22m.
+
+Code spans: \\e[38;2;177;185;249mnpm install\\e[39m, \\e[38;2;177;185;249mcode with \` backtick\\e[39m, and \\e[38;2;177;185;249ma < b && c > d\\e[39m.
+
+Links:
+
+- Inline: \\e]8;;https://code.claude.com\\a\\e[94mClaude Code\\e[39m\\e]8;;\\a
+- With a title: \\e]8;;https://example.com\\a\\e[94mexample\\e[39m\\e]8;;\\a ("Example title")
+- Bare URL: \\e]8;;https://github.com/bibixx\\a\\e[94mhttps://github.com/bibixx\\e[39m\\e]8;;\\a
+- Angle brackets: \\e]8;;https://example.org\\a\\e[94mhttps://example.org\\e[39m\\e]8;;\\a
+- Link text equal to the URL: \\e]8;;https://example.com\\a\\e[94mhttps://example.com\\e[39m\\e]8;;\\a
+- Email: someone@example.com
+- Mailto with text: write to me (someone@example.com)
+- Code that is a URL: \\e[38;2;177;185;249mhttps://example.com/path\\e[39m
+
+Image: alt text (https://example.com/image.png)
+
+Escapes: *not italic*, \`not code\`, # not a heading, 1. not a list.
+
+Entities: &amp; &lt; &gt; &copy; and a non-breaking space.
+
+Inline HTML: <kbd>Ctrl</kbd>+<kbd>C</kbd> and <b>bold tag</b>.
+
+Issue reference: see #123 and bibixx/md#4.
+
+\\e[90m<!-- An HTML comment, shown in grey -->\\e[39m"
+`;
+
+exports[`08-quotes.md: plain, 40 columns 1`] = `
+"▎ A single-line quote.
+
+▎ A quote with a long line that has to
+▎ wrap across the terminal so we can see
+▎ whether the continuation keeps the bar
+▎ on the left.
+
+▎ First paragraph of a quote.
+▎ 
+▎ Second paragraph of the same quote.
+
+▎ Outer quote.
+▎ ▎ Nested quote.
+▎ ▎ ▎ Doubly nested quote.
+
+▎ A quote with a list:
+▎ - one
+▎ - two
+▎ 
+▎ And code:
+▎ console.log("inside a quote");
+
+▎ Bold, code and a \x1B]8;;https://example.com\x07link\x1B]8;;\x07 inside a quote."
+`;
+
+exports[`08-quotes.md: plain, 80 columns 1`] = `
+"▎ A single-line quote.
+
+▎ A quote with a long line that has to wrap across the terminal so we can see
+▎ whether the continuation keeps the bar on the left.
+
+▎ First paragraph of a quote.
+▎ 
+▎ Second paragraph of the same quote.
+
+▎ Outer quote.
+▎ ▎ Nested quote.
+▎ ▎ ▎ Doubly nested quote.
+
+▎ A quote with a list:
+▎ - one
+▎ - two
+▎ 
+▎ And code:
+▎ console.log("inside a quote");
+
+▎ Bold, code and a \x1B]8;;https://example.com\x07link\x1B]8;;\x07 inside a quote."
+`;
+
+exports[`08-quotes.md: colour, 80 columns 1`] = `
+"\\e[2m▎\\e[22m \\e[3mA single-line quote.\\e[23m
+
+\\e[2m▎\\e[22m \\e[3mA quote with a long line that has to wrap across the terminal so we can see\\e[23m
+\\e[2m▎\\e[22m \\e[3mwhether the continuation keeps the bar on the left.\\e[23m
+
+\\e[2m▎\\e[22m \\e[3mFirst paragraph of a quote.\\e[23m
+\\e[2m▎\\e[22m \\e[3m\\e[23m
+\\e[2m▎\\e[22m \\e[3mSecond paragraph of the same quote.\\e[23m
+
+\\e[2m▎\\e[22m \\e[3mOuter quote.\\e[23m
+\\e[2m▎\\e[22m \\e[3m\\e[2m▎\\e[22m \\e[3mNested quote.\\e[23m\\e[3m\\e[23m
+\\e[2m▎\\e[22m \\e[3m\\e[2m▎\\e[22m \\e[3m\\e[2m▎\\e[22m \\e[3mDoubly nested quote.\\e[23m\\e[3m\\e[3m\\e[23m\\e[3m\\e[23m
+
+\\e[2m▎\\e[22m \\e[3mA quote with a list:\\e[23m
+\\e[2m▎\\e[22m \\e[3m- one\\e[23m
+\\e[2m▎\\e[22m \\e[3m- two\\e[23m
+\\e[2m▎\\e[22m \\e[3m\\e[23m
+\\e[2m▎\\e[22m \\e[3mAnd code:\\e[23m
+\\e[2m▎\\e[22m \\e[3mconsole.\\e[33mlog\\e[39m(\\e[31m"inside a quote"\\e[39m);\\e[23m
+
+\\e[2m▎\\e[22m \\e[3m\\e[1mBold\\e[22m, \\e[38;2;177;185;249mcode\\e[39m and a \\e]8;;https://example.com\\a\\e[94mlink\\e[39m\\e]8;;\\a inside a quote.\\e[23m"
+`;

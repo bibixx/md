@@ -96,11 +96,12 @@ The viewer lays out only what's on screen. Parsing and styling happen once, when
 ## Development
 
 ```sh
-bun test                          # unit tests
+bun test                          # unit and snapshot tests
+bun test --update-snapshots       # accept intended changes to rendered output
 bun bin/md.mjs fixtures/05-code.md
 ```
 
-`fixtures/` has markdown files covering each feature, for checking output by eye and comparing it with Claude Code. [`AGENTS.md`](AGENTS.md) describes the architecture and the rules the tests enforce.
+`fixtures/` has markdown files covering each feature. Their rendered output is kept as snapshots in `test/__snapshots__/`, so any change to how something looks fails a test until the snapshot is updated. They're also for checking output by eye and comparing it with Claude Code. [`AGENTS.md`](AGENTS.md) describes the architecture and the rules the tests enforce.
 
 ## License
 

@@ -16,7 +16,7 @@ bun bin/md.mjs -p -w 60 fixtures/02-tables-wrapping.md    # print at a fixed wid
 
 After `bun link`, `md` in `~/.bun/bin` points at the checkout, so edits take effect immediately. To exercise the viewer without a real terminal, run it under `script -q log bash -c "stty cols 80 rows 20; bun bin/md.mjs FILE"` and pipe keys in.
 
-The tests use the `node:test` and `node:assert` APIs, which `bun test` runs; keep new tests in the same style.
+The tests use the `node:test` and `node:assert` APIs, which `bun test` runs; keep new tests in the same style. The exception is `test/snapshots.test.mjs`, which needs `bun:test` for snapshots: it renders every fixture (plain at 40 and 80 columns, colour at 80) and compares the output with `test/__snapshots__/`. After an intended change to the output, run `bun test --update-snapshots` and read the snapshot diff before committing.
 
 ## Goal and where it deviates
 
