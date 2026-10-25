@@ -8,7 +8,7 @@
     "md": "bin/md.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "bun": ">=1.4"
   },
   "dependencies": {
     "chalk": "^5.6.2",
@@ -19,7 +19,7 @@
     "wrap-ansi": "^9.0.2"
   },
   "scripts": {
-    "test": "node --test test/*.test.mjs"
+    "test": "bun test"
   },
   "license": "MIT",
   "repository": {

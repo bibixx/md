@@ -76,6 +76,8 @@ function toAnsi(html) {
 export const highlighter = {
   supportsLanguage: (lang) => hljs.getLanguage(lang) !== undefined,
   highlight(code, { language }) {
+    // highlight.js logs a warning before throwing for an unknown language
+    if (!hljs.getLanguage(language)) return code;
     try {
       return toAnsi(hljs.highlight(code, { language, ignoreIllegals: true }).value);
     } catch {

@@ -2,19 +2,21 @@
 
 Guidance for coding agents working in this repository.
 
-`md` renders markdown in the terminal the way Claude Code renders its replies, plus a full-screen viewer. Plain Node ESM, no build step, no linter.
+`md` renders markdown in the terminal the way Claude Code renders its replies, plus a full-screen viewer. Runs on Bun; plain ESM JavaScript, no build step, no linter.
 
 ## Commands
 
 ```sh
-npm test                                              # all unit tests (node --test test/*.test.mjs)
-node --test test/table.test.mjs                       # one file
-node --test --test-name-pattern="header: value" test/table.test.mjs   # one test by name (regex)
-node bin/md.mjs fixtures/03-lists.md                  # viewer (when output is taller than the screen)
-node bin/md.mjs -p -w 60 fixtures/02-tables-wrapping.md   # print at a fixed width
+bun test                                              # all unit tests
+bun test test/table.test.mjs                          # one file
+bun test -t "header: value"                           # tests whose name matches (regex)
+bun bin/md.mjs fixtures/03-lists.md                   # viewer (when output is taller than the screen)
+bun bin/md.mjs -p -w 60 fixtures/02-tables-wrapping.md    # print at a fixed width
 ```
 
-After `npm link`, `md` on PATH points at the checkout, so edits take effect immediately. To exercise the viewer without a real terminal, run it under `script -q log bash -c "stty cols 80 rows 20; node bin/md.mjs FILE"` and pipe keys in.
+After `bun link`, `md` in `~/.bun/bin` points at the checkout, so edits take effect immediately. To exercise the viewer without a real terminal, run it under `script -q log bash -c "stty cols 80 rows 20; bun bin/md.mjs FILE"` and pipe keys in.
+
+The tests use the `node:test` and `node:assert` APIs, which `bun test` runs; keep new tests in the same style.
 
 ## Goal and where it deviates
 
@@ -58,4 +60,4 @@ The pipeline goes from source to tokens, then styled strings, then width-indepen
 
 - **Plain rendering:** `test/helpers.mjs` `renderPlain` renders with `chalk.level = 0`. Without colour, strikethrough falls back to literal `~~` and code backgrounds aren't padded, both on purpose.
 - **Config tests:** `CONFIG_PATH` is resolved when the module loads, so config tests import `config.mjs?case=N` afresh per case.
-- **Performance test:** `large-file.test.mjs` is a 500 ms budget on a ~720 KB document. `node:test`'s `timeout` can't interrupt synchronous code, so it also asserts the elapsed time and that under 10% of units were laid out.
+- **Performance test:** `large-file.test.mjs` is a 500 ms budget on a ~720 KB document. The test runner's `timeout` can't interrupt synchronous code, so it also asserts the elapsed time and that under 10% of units were laid out.

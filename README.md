@@ -11,14 +11,16 @@ md -w 80 README.md    # render at a fixed width
 
 ## Install
 
-Requires Node.js 20 or newer.
+Requires [Bun](https://bun.sh) 1.4 or newer.
 
 ```sh
 git clone https://github.com/bibixx/md.git
 cd md
-npm install
-npm link              # puts `md` on your PATH, pointing at this checkout
+bun install
+bun link              # adds `md` to ~/.bun/bin, pointing at this checkout
 ```
+
+`~/.bun/bin` needs to be on your `PATH`. Bun's install script adds it; a Homebrew install doesn't.
 
 ## The viewer
 
@@ -89,13 +91,13 @@ The full list, and the behaviour still to be compared side by side, is in [`fixt
 
 ## Performance
 
-The viewer lays out only what's on screen. Parsing and styling happen once, when the file opens. Line wrapping happens for each visible piece, so a resize only re-wraps one screenful. Code is highlighted the first time it comes into view. The rest of the document is laid out in the background, and until that finishes the footer shows approximate line numbers (`~`). On a 720 KB file, the first screen appears about a quarter of a second after starting, and a resize takes about 3 ms.
+The viewer lays out only what's on screen. Parsing and styling happen once, when the file opens. Line wrapping happens for each visible piece, so a resize only re-wraps one screenful. Code is highlighted the first time it comes into view. The rest of the document is laid out in the background, and until that finishes the footer shows approximate line numbers (`~`). On a 720 KB file, the first screen appears about 150 ms after starting, and a resize takes about 3 ms.
 
 ## Development
 
 ```sh
-npm test                          # unit tests (Node's built-in test runner)
-node bin/md.mjs fixtures/05-code.md
+bun test                          # unit tests
+bun bin/md.mjs fixtures/05-code.md
 ```
 
 `fixtures/` has markdown files covering each feature, for checking output by eye and comparing it with Claude Code. [`AGENTS.md`](AGENTS.md) describes the architecture and the rules the tests enforce.
