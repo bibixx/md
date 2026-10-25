@@ -3,7 +3,7 @@
 A terminal markdown renderer that looks like Claude Code's replies: box-drawn tables that fit the window, syntax-highlighted code, clickable links. Long documents open in a full-screen viewer with search, which stays fast on large files.
 
 ```sh
-md README.md          # full-screen viewer if it doesn't fit on screen, otherwise prints
+md README.md          # full-screen viewer
 md -p README.md       # always print
 cat notes.md | md     # read from stdin
 md -w 80 README.md    # render at a fixed width
@@ -24,7 +24,7 @@ bun link              # adds `md` to ~/.bun/bin, pointing at this checkout
 
 ## The viewer
 
-When the document is taller than the window, `md` opens it full screen. It re-wraps when you resize the window.
+In a terminal, `md` opens the document full screen, however short it is. It re-wraps when you resize the window. With `-p`, or when the output is piped, it prints instead.
 
 | Keys | |
 |------|---|

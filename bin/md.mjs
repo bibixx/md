@@ -12,7 +12,7 @@ import { loadConfig, CONFIG_PATH } from '../src/config.mjs';
 const USAGE = `usage: md [file] [options]
 
 Renders markdown the way Claude Code does. Reads stdin when no file is given.
-Opens a resizable full-screen view when the output is taller than the screen.
+Opens a resizable full-screen viewer in a terminal; prints when piped or with -p.
 
   -p, --print        print instead of opening the viewer
   -w, --width N      render at N columns (default: terminal width, or 100 when piped)
@@ -70,14 +70,8 @@ const doc = new Document(segments(src, ctx), config.padding);
 const fixedWidth = widthArg ? Number(widthArg) : undefined;
 doc.setWidth(fixedWidth ?? (out.isTTY ? out.columns : 100));
 
-// lay out only until the document overflows the screen
-const overflows = (rows) => {
-  let n = 0;
-  for (let i = 0; i < doc.length && n <= rows; i++) n += doc.height(i);
-  return n > rows;
-};
-
-if (out.isTTY && !flag('-p', '--print') && overflows(out.rows - 1)) {
+// in a terminal, always open the viewer, even when the document fits; piped output just prints
+if (out.isTTY && !flag('-p', '--print')) {
   page(doc, file ? path.basename(file) : 'stdin', { fixedWidth });
 } else {
   out.write(doc.all().join('\n') + '\n');
