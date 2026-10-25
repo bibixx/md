@@ -1,5 +1,21 @@
-import hljs from 'highlight.js';
+import { createRequire } from 'node:module';
+import hljs from 'highlight.js/lib/core';
 import chalk from 'chalk';
+import index from './hljs-languages.json' with { type: 'json' };
+
+// Languages are loaded the first time a code block uses them, rather than all ~190 at startup.
+// The index (from scripts/hljs-languages.mjs) knows every name and alias without loading any.
+const require = createRequire(import.meta.url);
+const names = new Set(index.names);
+const resolve = (lang) => {
+  const name = lang?.toLowerCase();
+  return names.has(name) ? name : index.aliases[name];
+};
+function load(name) {
+  if (hljs.getLanguage(name)) return;
+  hljs.registerLanguage(name, require(`highlight.js/lib/languages/${name}`));
+  for (const other of index.embeds[name] ?? []) load(other);
+}
 
 const plain = (s) => s;
 
@@ -74,12 +90,14 @@ function toAnsi(html) {
 }
 
 export const highlighter = {
-  supportsLanguage: (lang) => hljs.getLanguage(lang) !== undefined,
+  supportsLanguage: (lang) => resolve(lang) !== undefined,
   highlight(code, { language }) {
     // highlight.js logs a warning before throwing for an unknown language
-    if (!hljs.getLanguage(language)) return code;
+    const name = resolve(language);
+    if (!name) return code;
+    load(name);
     try {
-      return toAnsi(hljs.highlight(code, { language, ignoreIllegals: true }).value);
+      return toAnsi(hljs.highlight(code, { language: name, ignoreIllegals: true }).value);
     } catch {
       return code;
     }

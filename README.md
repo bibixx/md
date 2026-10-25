@@ -91,7 +91,7 @@ The full list, and the behaviour still to be compared side by side, is in [`fixt
 
 ## Performance
 
-The viewer lays out only what's on screen. Parsing and styling happen once, when the file opens. Line wrapping happens for each visible piece, so a resize only re-wraps one screenful. Code is highlighted the first time it comes into view. The rest of the document is laid out in the background, and until that finishes the footer shows approximate line numbers (`~`). On a 720 KB file, the first screen appears about 150 ms after starting, and a resize takes about 3 ms.
+The viewer lays out only what's on screen. Parsing and styling happen once, when the file opens. Line wrapping happens for each visible piece, so a resize only re-wraps one screenful. Code is highlighted the first time it comes into view. The rest of the document is laid out in the background, and until that finishes the footer shows approximate line numbers (`~`). Code languages are loaded the first time a block needs them, rather than all ~190 at startup, and text is measured and wrapped with Bun's native functions. On a 720 KB file, the first screen appears about 110 ms after starting, a resize takes about 1 ms, and printing the whole file takes under 0.3 s.
 
 ## Development
 
