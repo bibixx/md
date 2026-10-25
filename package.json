@@ -20,5 +20,15 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bibixx/md.git"
+  },
+  "homepage": "https://github.com/bibixx/md#readme",
+  "bugs": {
+    "url": "https://github.com/bibixx/md/issues"
+  },
+  "author": "Bartosz Legięć"
 }

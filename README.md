@@ -99,3 +99,7 @@ node bin/md.mjs fixtures/05-code.md
 ```
 
 `fixtures/` has markdown files covering each feature, for checking output by eye and comparing it with Claude Code. [`AGENTS.md`](AGENTS.md) describes the architecture and the rules the tests enforce.
+
+## License
+
+[MIT](LICENSE)
