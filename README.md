@@ -1,6 +1,8 @@
 # md
 
-A terminal markdown renderer that looks like Claude Code's replies: box-drawn tables that fit the window, syntax-highlighted code, clickable links. Long documents open in a full-screen viewer with search, which stays fast on large files.
+A terminal markdown renderer that looks like Claude Code's replies: box-drawn tables that fit the window, syntax-highlighted code, clickable links. Documents open in a full-screen viewer with search, which stays fast even on large files.
+
+![md showing a release checklist with a table, a task list, highlighted TypeScript and a quote](docs/screenshot.png)
 
 ```sh
 md README.md          # full-screen viewer
@@ -98,6 +100,7 @@ The viewer lays out only what's on screen. Parsing and styling happen once, when
 ```sh
 bun test                          # unit and snapshot tests
 bun test --update-snapshots       # accept intended changes to rendered output
+vhs docs/screenshot.tape          # regenerate the README screenshot (needs VHS)
 bun bin/md.mjs fixtures/05-code.md
 ```
 

@@ -12,6 +12,7 @@ bun test test/table.test.mjs                          # one file
 bun test -t "header: value"                           # tests whose name matches (regex)
 bun bin/md.mjs fixtures/03-lists.md                   # viewer (always, in a terminal)
 bun bin/md.mjs -p -w 60 fixtures/02-tables-wrapping.md    # print at a fixed width
+vhs docs/screenshot.tape                              # regenerate docs/screenshot.png for the README
 ```
 
 After `bun link`, `md` in `~/.bun/bin` points at the checkout, so edits take effect immediately. To exercise the viewer without a real terminal, run it under `script -q log bash -c "stty cols 80 rows 20; bun bin/md.mjs FILE"` and pipe keys in.
