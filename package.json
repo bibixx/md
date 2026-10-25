@@ -1,0 +1,24 @@
+{
+  "name": "md",
+  "version": "0.1.0",
+  "description": "Render markdown in the terminal the way Claude Code does",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "md": "bin/md.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "highlight.js": "^11.12.0",
+    "marked": "^15.0.12",
+    "string-width": "^7.2.0",
+    "strip-ansi": "^7.2.0",
+    "wrap-ansi": "^9.0.2"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}
