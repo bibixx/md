@@ -1,32 +1,35 @@
-# md
+<h1 align="center">md</h1>
 
-A terminal markdown renderer that looks like Claude Code's replies: box-drawn tables that fit the window, syntax-highlighted code, clickable links. Documents open in a full-screen viewer with search, which stays fast even on large files.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/bibixx/md" alt="License: MIT"></a><br>
+  Markdown in your terminal, the way Claude Code shows it.
+</p>
+
+<p align="center">
+  <a href="#key-features">Key features</a> •
+  <a href="#how-to-use">How to use</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#customization">Customization</a> •
+  <a href="#project-goals-and-alternatives">Project goals, alternatives</a>
+</p>
 
 ![md showing a release checklist with a table, a task list, highlighted TypeScript and a quote](docs/screenshot.png)
 
-```sh
-md README.md          # full-screen viewer
-md -p README.md       # always print
-cat notes.md | md     # read from stdin
-md -w 80 README.md    # render at a fixed width
-```
+`md` renders markdown files in the terminal with the same look as Claude Code's replies: box-drawn tables that fit the window, highlighted code, clickable links. It opens them in a full-screen viewer with search, and stays fast on large files.
 
-## Install
+## Key features
 
-Requires [Bun](https://bun.sh) 1.4 or newer.
+### Tables that fit
 
-```sh
-git clone https://github.com/bibixx/md.git
-cd md
-bun install
-bun link              # adds `md` to ~/.bun/bin, pointing at this checkout
-```
+Tables get proper box borders and squeeze into whatever width your terminal has. Long cells wrap inside their column instead of running off the edge. And if a table really can't fit (say one of the cells is a whole essay), `md` gives up on the box and prints every row as `Header: value` lines instead.
 
-`~/.bun/bin` needs to be on your `PATH`. Bun's install script adds it; a Homebrew install doesn't.
+### Syntax highlighting
 
-## The viewer
+Code blocks are highlighted with [highlight.js](https://highlightjs.org), in the same colours Claude Code uses, so around 190 languages are covered. Each language is loaded the first time a code block needs it, so you don't pay for all 190 of them on every run.
 
-In a terminal, `md` opens the document full screen, however short it is. It re-wraps when you resize the window. With `-p`, or when the output is piped, it prints instead.
+### A full-screen viewer
+
+In a terminal, `md` opens the document full screen. You can scroll with the keyboard or the mouse wheel, search with `/`, and resize the window as much as you like; everything re-wraps to the new width.
 
 | Keys | |
 |------|---|
@@ -40,23 +43,78 @@ In a terminal, `md` opens the document full screen, however short it is. It re-w
 | `?` | Help |
 | `q` | Quit |
 
-Search matches the text as it's shown, with colours removed. It's literal, not a regex, and ignores case unless the query has a capital letter. As in `less`, a match split across a wrapped line isn't found.
+Search looks for plain text, not a regex, and ignores case unless you type a capital letter.
 
-While the viewer is open it captures the mouse for the scroll wheel, so selecting text needs your terminal's override key, for example Option+drag in iTerm2.
+### Big files
 
-## Options
+`md` lays out only what's on the screen and does the rest in the background. Until that's done, the footer shows approximate line numbers, marked with `~`. On a 720 KB file the first screen shows up after about 110 ms, and a resize takes about 1 ms.
 
+### Printing
+
+With `-p`, or whenever the output goes to a pipe or a file, `md` just prints the rendered document, so you can use it pretty much the way you'd use `cat`.
+
+## How to use
+
+Open a file:
+
+```sh
+md README.md
 ```
--p, --print        print instead of opening the viewer
--w, --width N      render at N columns (default: terminal width, or 100 when piped)
-    --light        light theme colours (default: detected from COLORFGBG)
-    --dark         dark theme colours
-    --no-color     plain text
+
+Print it instead of opening the viewer:
+
+```sh
+md -p README.md
 ```
 
-## Config
+Read from stdin:
 
-`~/.config/md/config.json`, or `$XDG_CONFIG_HOME/md/config.json`:
+```sh
+cat notes.md | md
+```
+
+Render at a fixed width, for example when printing for something narrower than your terminal:
+
+```sh
+md -p -w 80 CHANGELOG.md
+```
+
+### Integration with other tools
+
+#### `git`
+
+Read an older version of a document:
+
+```sh
+git show v1.0.0:README.md | md
+```
+
+#### `curl`
+
+Read a README without cloning the repository:
+
+```sh
+curl -s https://raw.githubusercontent.com/bibixx/md/main/README.md | md
+```
+
+## Installation
+
+There are no packages yet, so for now it's from source. You'll need [Bun](https://bun.sh) 1.4 or newer.
+
+```sh
+git clone https://github.com/bibixx/md.git
+cd md
+bun install
+bun link
+```
+
+`bun link` puts `md` in `~/.bun/bin`, pointing at your checkout, so updating is just a `git pull`.
+
+## Customization
+
+### Configuration file
+
+`md` reads `~/.config/md/config.json` (or `$XDG_CONFIG_HOME/md/config.json` if you set that). These are the defaults:
 
 ```json
 {
@@ -66,45 +124,56 @@ While the viewer is open it captures the mouse for the scroll wheel, so selectin
 }
 ```
 
-- **`padding`:** blank lines above and below the document, and spaces at its left and right edges.
-- **`codePadding`:** blank rows and columns inside a code block's background.
-- **`tabWidth`:** columns between tab stops in code. Tabs are expanded to spaces.
+`padding` is the space around the whole document: blank lines above and below, and spaces on the left and right. `codePadding` is the same thing inside a code block's background. Both take `vertical` and `horizontal` as shorthands, and a specific side wins over a shorthand. `tabWidth` is how far apart tab stops are in code.
 
-Both padding settings also accept `vertical` and `horizontal` shorthands; a specific side overrides a shorthand. The values shown are the defaults.
+### Light and dark
 
-## How it compares with Claude Code
+`md` guesses whether your terminal is light or dark from the `COLORFGBG` variable (iTerm2 and a few others set it), and goes with dark if it can't tell. If it guesses wrong, pass `--light` or `--dark`.
 
-`md` is modelled on how Claude Code renders markdown:
-- **Tables:** box borders, column fitting, and a `Header: value` layout for tables too tall or wide to fit.
-- **Lists:** `-` bullets; numbered lists go `1.` → `a.` → `i.` as they nest.
-- **Headings, code, links and quotes:** the same styles and colours.
-- **Spacing:** the same blank lines between blocks.
+### Command-line options
 
-Where `md` deliberately differs, it's to suit files rather than chat replies:
-- **Line breaks:** single newlines inside a paragraph become spaces, so hard-wrapped files reflow to the window width.
-- **Tables:** wrapped tables fill the full width.
-- **Lists:** code, quotes and tables inside list items are indented under the item.
-- **Rules and comments:** horizontal rules are drawn as a grey line, and HTML comments are grey.
-- **Code blocks:** they get a faint background.
+```
+-p, --print        print instead of opening the viewer
+-w, --width N      render at N columns (default: terminal width, or 100 when piped)
+    --light        light theme colours
+    --dark         dark theme colours
+    --no-color     plain text
+-h, --help         show the help
+```
 
-The full list, and the behaviour still to be compared side by side, is in [`fixtures/README.md`](fixtures/README.md).
+## Troubleshooting
 
-`md` is not affiliated with or endorsed by Anthropic.
+### Selecting text in the viewer
 
-## Performance
+The viewer listens to the mouse so the scroll wheel works, and that gets in the way of selecting text. Most terminals let you get around it with a modifier: <kbd>Option</kbd>+drag in iTerm2, <kbd>Shift</kbd>+drag in most others. Or quit and use `md -p`.
 
-The viewer lays out only what's on screen. Parsing and styling happen once, when the file opens. Line wrapping happens for each visible piece, so a resize only re-wraps one screenful. Code is highlighted the first time it comes into view. The rest of the document is laid out in the background, and until that finishes the footer shows approximate line numbers (`~`). Code languages are loaded the first time a block needs them, rather than all ~190 at startup, and text is measured and wrapped with Bun's native functions. On a 720 KB file, the first screen appears about 110 ms after starting, a resize takes about 1 ms, and printing the whole file takes under 0.3 s.
+### No colours
+
+That's on purpose when the output isn't a terminal. Set `FORCE_COLOR=3` if you want them anyway.
+
+## Project goals and alternatives
+
+`md` tries to:
+
+- look like Claude Code, as closely as makes sense for files
+- stay fast, even on files much bigger than anything you'd write by hand
+
+Some things are different from Claude Code on purpose, mostly because a file isn't a chat reply. Single newlines inside a paragraph turn into spaces, so hard-wrapped files reflow. Tables that wrap use the whole width. Code, quotes and tables inside list items are indented under the item. Horizontal rules are drawn as a grey line, HTML comments are grey, and code blocks get a faint background. The full list (plus what's still waiting to be compared side by side) is in [`fixtures/README.md`](fixtures/README.md).
+
+If you're after something more established, [glow](https://github.com/charmbracelet/glow) is the one most people know, and it comes with a nice file browser. There's also [treemd](https://github.com/Epistates/treemd), [md-tui](https://github.com/henriklovhaug/md-tui), and [mdfried](https://github.com/benjajaja/mdfried), which can even show images.
+
+`md` isn't affiliated with or endorsed by Anthropic.
 
 ## Development
 
 ```sh
-bun test                          # unit and snapshot tests
-bun test --update-snapshots       # accept intended changes to rendered output
-vhs docs/screenshot.tape          # regenerate the README screenshot (needs VHS)
+bun test                       # unit and snapshot tests
+bun test --update-snapshots    # accept intended changes to the rendered output
 bun bin/md.mjs fixtures/05-code.md
+vhs docs/screenshot.tape       # regenerate the screenshot above (needs VHS)
 ```
 
-`fixtures/` has markdown files covering each feature. Their rendered output is kept as snapshots in `test/__snapshots__/`, so any change to how something looks fails a test until the snapshot is updated. They're also for checking output by eye and comparing it with Claude Code. [`AGENTS.md`](AGENTS.md) describes the architecture and the rules the tests enforce.
+Every file in `fixtures/` is rendered and compared with a saved snapshot, so any change to how something looks fails a test until the snapshot is updated. Review the snapshot diff before committing. [`AGENTS.md`](AGENTS.md) explains how the rendering pipeline fits together.
 
 ## License
 
