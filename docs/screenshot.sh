@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Regenerates docs/screenshot.png for the README: renders docs/screenshot.tape with VHS, then
-# rounds the corners (transparent) and adds a light outline with ImageMagick.
-# Needs vhs and magick. Run from anywhere; paths are relative to the repository root.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

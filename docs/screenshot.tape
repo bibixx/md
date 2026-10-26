@@ -1,5 +1,4 @@
-# The terminal session behind docs/screenshot.png. Run docs/screenshot.sh rather than this file:
-# it also rounds the corners and adds the outline. (Needs VHS: https://github.com/charmbracelet/vhs)
+# Run through docs/screenshot.sh, which also rounds the corners and adds the outline.
 
 Set Shell "bash"
 Set FontFamily "Menlo"
@@ -9,9 +8,8 @@ Set Height 1470
 Set Padding 48
 Set Theme "GitHub Dark"
 
-# start the viewer without showing the command being typed
 Hide
-Type "clear && bun bin/md.mjs docs/demo.md"
+Type "clear && bun bin/md.ts docs/demo.md"
 Enter
 Sleep 2s
 Show

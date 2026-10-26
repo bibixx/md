@@ -168,8 +168,10 @@ If you're after something more established, [glow](https://github.com/charmbrace
 
 ```sh
 bun test                       # unit and snapshot tests
+bun run typecheck              # TypeScript, strict
+bun run lint                   # oxlint, strict and type-aware
 bun test --update-snapshots    # accept intended changes to the rendered output
-bun bin/md.mjs fixtures/05-code.md
+bun bin/md.ts fixtures/05-code.md
 docs/screenshot.sh             # regenerate the screenshot above (needs VHS and ImageMagick)
 ```
 

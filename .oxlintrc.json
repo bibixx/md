@@ -1,0 +1,86 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "import", "promise", "node"],
+  // md's own rules (JS plugins are an alpha oxlint feature)
+  "jsPlugins": ["./lint/plugin.ts"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "error",
+    "perf": "error"
+  },
+  "env": { "builtin": true },
+  "rules": {
+    // type-aware rules (`oxlint --type-aware`)
+    "typescript/no-explicit-any": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/await-thenable": "error",
+    "typescript/switch-exhaustiveness-check": "error",
+    "typescript/no-unnecessary-condition": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/no-unsafe-argument": "error",
+    "typescript/no-unsafe-assignment": "error",
+    "typescript/no-unsafe-call": "error",
+    "typescript/no-unsafe-member-access": "error",
+    "typescript/no-unsafe-return": "error",
+    "typescript/restrict-template-expressions": "error",
+    "typescript/prefer-nullish-coalescing": "error",
+    "typescript/prefer-optional-chain": "error",
+    "eqeqeq": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-console": ["error", { "allow": ["error"] }],
+
+    // Terminal escape codes are written as lowercase \x1b. unicorn/escape-case can only require
+    // uppercase, so md/lowercase-hex-escapes enforces lowercase instead.
+    "md/lowercase-hex-escapes": "error",
+    "unicorn/escape-case": "off",
+    "unicorn/no-hex-escape": "off",
+
+    // Matching terminal escape codes means control characters in regexes.
+    "no-control-regex": "off",
+
+    // Would need every parameter deeply readonly, including marked's own mutable token types.
+    "typescript/prefer-readonly-parameter-types": "off",
+
+    // Comments at the end of a line are kept where they're clearest.
+    "no-inline-comments": "off",
+
+    // The default 50 would split functions like render() and segments() for no gain.
+    "max-lines-per-function": ["error", { "max": 120, "skipBlankLines": true, "skipComments": true }],
+
+    // Bun first: Node APIs are only allowed where Bun has no equivalent.
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "node:fs",
+            "allowImportNames": ["openSync", "mkdtempSync"],
+            "message": "Use Bun.file() / Bun.write() / Bun.stdin / Bun.Glob. Only openSync (for /dev/tty) and mkdtempSync have no Bun equivalent."
+          },
+          { "name": "fs", "message": "Use Bun.file() / Bun.write(), or the node: prefix for what Bun can't do." },
+          { "name": "node:fs/promises", "message": "Use Bun.file() / Bun.write()." },
+          { "name": "node:child_process", "message": "Use Bun.spawn() / Bun.spawnSync() / Bun.$." },
+          { "name": "node:module", "message": "Use import.meta.require()." },
+          { "name": "node:test", "message": "Use bun:test." },
+          { "name": "node:assert", "message": "Use expect() from bun:test." },
+          { "name": "node:assert/strict", "message": "Use expect() from bun:test." },
+          { "name": "node:crypto", "message": "Use Bun.CryptoHasher / Bun.hash / Bun.password, or Web Crypto." },
+          { "name": "node:http", "message": "Use Bun.serve()." },
+          { "name": "node:util", "message": "Use Bun.inspect() / Bun.deepEquals() / Bun.sleep()." }
+        ]
+      }
+    ],
+    "no-restricted-properties": [
+      "error",
+      { "object": "process", "property": "env", "message": "Use Bun.env." },
+      { "object": "process", "property": "argv", "message": "Use Bun.argv." }
+    ]
+  },
+  // the lint samples contain deliberate mistakes; the rule's tests lint copies of them
+  "ignorePatterns": ["node_modules", "test/__snapshots__", "test/lint-samples"]
+}

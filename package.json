@@ -5,7 +5,7 @@
   "private": true,
   "type": "module",
   "bin": {
-    "md": "bin/md.mjs"
+    "md": "bin/md.ts"
   },
   "engines": {
     "bun": ">=1.4"
@@ -17,7 +17,9 @@
   },
   "scripts": {
     "test": "bun test",
-    "gen:languages": "bun scripts/hljs-languages.mjs"
+    "gen:languages": "bun scripts/hljs-languages.ts",
+    "typecheck": "tsc",
+    "lint": "oxlint --type-aware --deny-warnings"
   },
   "license": "MIT",
   "repository": {
@@ -28,5 +30,12 @@
   "bugs": {
     "url": "https://github.com/bibixx/md/issues"
   },
-  "author": "Bartosz Legięć"
+  "author": "Bartosz Legięć",
+  "devDependencies": {
+    "@oxlint/plugins": "1.89.0",
+    "@types/bun": "^1.4.4",
+    "oxlint": "1.89.0",
+    "oxlint-tsgolint": "7.0.2005",
+    "typescript": "^7.0.2"
+  }
 }
