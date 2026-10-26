@@ -170,7 +170,7 @@ If you're after something more established, [glow](https://github.com/charmbrace
 bun test                       # unit and snapshot tests
 bun test --update-snapshots    # accept intended changes to the rendered output
 bun bin/md.mjs fixtures/05-code.md
-vhs docs/screenshot.tape       # regenerate the screenshot above (needs VHS)
+docs/screenshot.sh             # regenerate the screenshot above (needs VHS and ImageMagick)
 ```
 
 Every file in `fixtures/` is rendered and compared with a saved snapshot, so any change to how something looks fails a test until the snapshot is updated. Review the snapshot diff before committing. [`AGENTS.md`](AGENTS.md) explains how the rendering pipeline fits together.

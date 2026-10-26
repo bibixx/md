@@ -1,5 +1,5 @@
-# Regenerates docs/screenshot.png, the screenshot in the README: `vhs docs/screenshot.tape`
-# (needs VHS: https://github.com/charmbracelet/vhs). Run it from the repository root.
+# The terminal session behind docs/screenshot.png. Run docs/screenshot.sh rather than this file:
+# it also rounds the corners and adds the outline. (Needs VHS: https://github.com/charmbracelet/vhs)
 
 Set Shell "bash"
 Set FontFamily "Menlo"
